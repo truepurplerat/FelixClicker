@@ -26,7 +26,7 @@ tasks.withType(JavaCompile) {
 
 application {
   mainModule = 'com.thepigrat.felixclicker'
-  mainClass = 'com.thepigrat.felixclicker.HelloApplication'
+  mainClass = 'com.thepigrat.felixclicker.Main'
 }
 
 javafx {

@@ -5,10 +5,13 @@ import javafx.scene.control.Label;
 
 public class MainController {
     @FXML
-    private Label welcomeText;
+    private Label currency;
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to FelixClicker");
+        Main.game.increaseCurrency();
+        System.out.println(Main.game.currency);
+        currency.setText(String.valueOf(Main.game.currency));
     }
+
 }
