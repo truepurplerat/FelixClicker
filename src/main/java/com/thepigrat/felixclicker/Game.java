@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Game {
-
     public Purse purse = new Purse();
     MainController controller;
     Set<Upgrade> activeupgrades = new HashSet<>();
@@ -31,7 +30,7 @@ public class Game {
             totfactor = totfactor * producer.getfactor();
         }
         if (totfactor != 0) {
-          purse.setCurrency(purse.getCurrency()*totfactor);
+            purse.setCurrency(purse.getCurrency() + totfactor);
             controller.currency.setText(String.valueOf(purse.getCurrency()));
         }
     }
@@ -45,20 +44,7 @@ public class Game {
         if (totfactor == 0) {
             purse.increaseCurrencyBy1();
         } else {
-        purse.setCurrency(purse.getCurrency()+totfactor);
+            purse.setCurrency(purse.getCurrency() + totfactor);
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

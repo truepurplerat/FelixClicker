@@ -31,7 +31,7 @@ public class Main extends Application {
     public static void runUpgrades() {
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE); // Execute indefinitely
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10), event -> {
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(30), event -> {
             game.generate();
         }));
         // Start the timeline
