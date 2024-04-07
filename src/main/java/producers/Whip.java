@@ -1,17 +1,13 @@
 package producers;
 
 public class Whip extends Producer {
-    final int factor = 1;
-
     @Override
     public int getfactor() {
-        return factor;
-
+        return 10;
     }
+
     @Override
-    public long getprice(){
-        return 69;
+    public long getprice() {
+        return 5;
     }
-
-
 }

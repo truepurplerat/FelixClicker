@@ -23,26 +23,17 @@ public class Game {
         activeupgrades.add(new AnnoyingMateUpgrade());
         activeupgrades.add(new FatLunaUpgrade());
         activeproducers.add(new Whip());
-        this.controller= controller;
+        this.controller = controller;
     }
 
     public void generate() {
-        while (true) {
-            var totfactor = 1;
-            for (var producer : activeproducers) {
-                totfactor = totfactor * producer.getfactor();
-            }
-            if (totfactor != 0) {
-                currency = currency + totfactor;
-                controller.currency.setText(String.valueOf(currency));
-
-
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        var totfactor = 1;
+        for (var producer : activeproducers) {
+            totfactor = totfactor * producer.getfactor();
+        }
+        if (totfactor != 0) {
+            currency = currency + totfactor;
+            controller.currency.setText(String.valueOf(currency));
         }
     }
 

@@ -9,9 +9,9 @@ public class MainController {
 
     @FXML
     protected void onHelloButtonClick() {
-        Main.game.get().increaseCurrency();
-        System.out.println(Main.game.get().currency);
-        currency.setText(String.valueOf(Main.game.get().currency));
+        Main.game.increaseCurrency();
+        System.out.println(Main.game.currency);
+        currency.setText(String.valueOf(Main.game.currency));
     }
 
 }

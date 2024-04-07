@@ -12,5 +12,5 @@
     </padding>
 
     <Label fx:id="currency"/>
-    <Button text="" onAction="#onHelloButtonClick"/>
+    <Button onAction="#onHelloButtonClick"/>
 </VBox>

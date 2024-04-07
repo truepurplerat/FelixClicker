@@ -1,16 +1,18 @@
 package com.thepigrat.felixclicker;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import util.ProducerThread;
+import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Main extends Application {
-    public static AtomicReference <Game> game;
+    public static Game game;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
@@ -18,10 +20,22 @@ public class Main extends Application {
         stage.setTitle("FelixClicker");
         stage.setScene(scene);
         stage.show();
-        var controller= (MainController)fxmlLoader.getController();
-        game=new AtomicReference<>(new Game(controller));
-        var thread=new ProducerThread();
-        thread.start();
+
+        // Load controller from main.fxml and create new game
+        var controller = (MainController) fxmlLoader.getController();
+        game = new Game(controller);
+
+        runUpgrades();
+    }
+
+    public static void runUpgrades() {
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE); // Execute indefinitely
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10), event -> {
+            game.generate();
+        }));
+        // Start the timeline
+        timeline.play();
     }
 
     public static void main(String[] args) {
