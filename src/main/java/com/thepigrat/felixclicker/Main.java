@@ -20,14 +20,20 @@ public class Main extends Application {
         stage.setTitle("FelixClicker");
         stage.setScene(scene);
         stage.show();
+
+        // Load controller from main.fxml and create new game
         var controller = (MainController) fxmlLoader.getController();
         game = new Game(controller);
+
+        runUpgrades();
+    }
+
+    public static void runUpgrades() {
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE); // Execute indefinitely
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10), event -> {
             game.generate();
         }));
-
         // Start the timeline
         timeline.play();
     }

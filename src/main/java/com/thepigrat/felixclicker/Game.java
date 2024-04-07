@@ -34,8 +34,6 @@ public class Game {
         if (totfactor != 0) {
             currency = currency + totfactor;
             controller.currency.setText(String.valueOf(currency));
-
-
         }
     }
 
