@@ -1,4 +1,4 @@
-package producers;
+package com.thepigrat.felixclicker.producers;
 
 public class Producer {
     public int getfactor(){

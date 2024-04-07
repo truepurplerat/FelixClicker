@@ -1,4 +1,4 @@
-package producers;
+package com.thepigrat.felixclicker.producers;
 
 public class Whip extends Producer {
     @Override

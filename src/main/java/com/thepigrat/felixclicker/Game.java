@@ -3,17 +3,16 @@ package com.thepigrat.felixclicker;
 import com.thepigrat.felixclicker.upgrades.AnnoyingMateUpgrade;
 import com.thepigrat.felixclicker.upgrades.FatLunaUpgrade;
 import com.thepigrat.felixclicker.upgrades.Upgrade;
-import producers.Producer;
-import producers.Whip;
+import com.thepigrat.felixclicker.producers.Producer;
+import com.thepigrat.felixclicker.producers.Whip;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Game {
 
-    public int currency = 0;
+    public Purse purse = new Purse();
     MainController controller;
     Set<Upgrade> activeupgrades = new HashSet<>();
     ArrayList<Producer> activeproducers = new ArrayList<>();
@@ -32,8 +31,8 @@ public class Game {
             totfactor = totfactor * producer.getfactor();
         }
         if (totfactor != 0) {
-            currency = currency + totfactor;
-            controller.currency.setText(String.valueOf(currency));
+          purse.setCurrency(purse.getCurrency()*totfactor);
+            controller.currency.setText(String.valueOf(purse.getCurrency()));
         }
     }
 
@@ -44,9 +43,9 @@ public class Game {
         }
 
         if (totfactor == 0) {
-            currency++;
+            purse.increaseCurrencyBy1();
         } else {
-            currency = currency + totfactor;
+        purse.setCurrency(purse.getCurrency()+totfactor);
         }
     }
 }
