@@ -1,13 +1,17 @@
 package com.thepigrat.felixclicker;
 
+import com.thepigrat.felixclicker.data.DataManager;
+import com.thepigrat.felixclicker.data.LoadedGame;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.effect.Bloom;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.DataInput;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -23,9 +27,11 @@ public class Main extends Application {
 
         // Load controller from main.fxml and create new game
         var controller = (MainController) fxmlLoader.getController();
-        game = new Game(controller);
+
+        onStart(controller);
 
         runUpgrades();
+        onExit();
     }
 
     public static void runUpgrades() {
@@ -38,16 +44,22 @@ public class Main extends Application {
         timeline.play();
     }
 
+    public static void onExit() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> game.save()));
+    }
+
+    public static void onStart(MainController controller) {
+        var loaded = new LoadedGame();
+        loaded.parse();
+        System.out.println(loaded.getCurrency());
+
+        game = new Game(controller);
+        if (loaded.isLoaded()) {
+            game.purse.setCurrency(loaded.getCurrency());
+        }
+    }
+
     public static void main(String[] args) {
         launch();
     }
 }
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,6 @@
 package com.thepigrat.felixclicker;
 
+import com.thepigrat.felixclicker.data.DataManager;
 import com.thepigrat.felixclicker.upgrades.AnnoyingMateUpgrade;
 import com.thepigrat.felixclicker.upgrades.FatLunaUpgrade;
 import com.thepigrat.felixclicker.upgrades.Upgrade;
@@ -11,6 +12,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Game {
+    public static final String MONEY_KEY = "$money";
+
     public Purse purse = new Purse();
     MainController controller;
     Set<Upgrade> activeupgrades = new HashSet<>();
@@ -46,5 +49,13 @@ public class Game {
         } else {
             purse.setCurrency(purse.getCurrency() + totfactor);
         }
+    }
+
+    public void save() {
+        var toSave = new StringBuilder();
+        var money = String.valueOf(this.purse.getCurrency());
+        toSave.append(MONEY_KEY+" ").append(money);
+        var x = DataManager.of(toSave.toString()).encode().save().data;
+        System.out.println("saved: "+money);
     }
 }
