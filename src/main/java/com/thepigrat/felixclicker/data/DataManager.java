@@ -58,7 +58,7 @@ public class DataManager {
             return Arrays.stream(builder.toString().split(" ")).toList();
         } catch (Throwable ignored) {
         }
-        return null;
+        return List.of();
     }
 
     private static String stringFromBytes(List<Byte> bytes) {

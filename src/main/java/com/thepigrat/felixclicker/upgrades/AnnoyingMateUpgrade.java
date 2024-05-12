@@ -1,10 +1,14 @@
 package com.thepigrat.felixclicker.upgrades;
 
 public class AnnoyingMateUpgrade extends Upgrade {
-    final int factor = 2;
 
     @Override
-    public int getfactor() {
-        return factor;
+    public long getfactor() {
+        return 2;
+    }
+
+    @Override
+    public long getprice() {
+        return 100000000;
     }
 }

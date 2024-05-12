@@ -1,10 +1,14 @@
 package com.thepigrat.felixclicker.upgrades;
 
 public class FatLunaUpgrade extends Upgrade {
-    final int factor = 3;
 
     @Override
-    public int getfactor() {
-        return factor;
+    public long getfactor() {
+        return 3;
+    }
+
+    @Override
+    public long getprice() {
+        return 10;
     }
 }

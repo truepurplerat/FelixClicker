@@ -14,32 +14,42 @@ import java.util.Set;
 public class Game {
     public static final String MONEY_KEY = "$money";
 
-    public Purse purse = new Purse();
+    public Purse purse;
     MainController controller;
-    Set<Upgrade> activeupgrades = new HashSet<>();
-    ArrayList<Producer> activeproducers = new ArrayList<>();
+    //Set speichert immer nur einen Wert
+    HashSet<Upgrade> activeupgrades;
+    //Arraylist kann von jedem unendlich viel speichern
+    ArrayList<Producer> activeproducers;
 
 
     public Game(MainController controller) {
-        activeupgrades.add(new AnnoyingMateUpgrade());
-        activeupgrades.add(new FatLunaUpgrade());
-        activeproducers.add(new Whip());
+        purse = new Purse();
+        activeupgrades = new HashSet<>();
+        activeproducers = new ArrayList<>();
+
+       // activeupgrades.add(new AnnoyingMateUpgrade());
+      //  activeupgrades.add(new FatLunaUpgrade());
+       // activeproducers.add(new Whip());
         this.controller = controller;
     }
 
     public void generate() {
         var totfactor = 1;
+        System.out.println(activeproducers);
         for (var producer : activeproducers) {
             totfactor = totfactor * producer.getfactor();
         }
-        if (totfactor != 0) {
+        if (totfactor != 1) {
             purse.setCurrency(purse.getCurrency() + totfactor);
-            controller.currency.setText(String.valueOf(purse.getCurrency()));
+            updatecurrency();
         }
+    }
+    public void updatecurrency(){
+        controller.currency.setText(String.valueOf(purse.getCurrency()));
     }
 
     public void increaseCurrency() {
-        var totfactor = 1;
+        long totfactor = 1;
         for (var upgrade : activeupgrades) {
             totfactor = totfactor * upgrade.getfactor();
         }
@@ -54,8 +64,17 @@ public class Game {
     public void save() {
         var toSave = new StringBuilder();
         var money = String.valueOf(this.purse.getCurrency());
-        toSave.append(MONEY_KEY+" ").append(money);
+        toSave.append(MONEY_KEY + " ").append(money);
         var x = DataManager.of(toSave.toString()).encode().save().data;
-        System.out.println("saved: "+money);
+        System.out.println("saved: " + money);
+    }
+
+    public void buyupgrade(Upgrade upgrade) {
+        var price= upgrade.getprice();
+        var money= purse.getCurrency();
+        if (money>=price){
+            purse.setCurrency(money-price);
+            activeupgrades.add(upgrade);
+        }
     }
 }
