@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LoadedGame {
     private final List<String> rawData;
-    private int currency;
+    private long currency;
 
     public LoadedGame() {
         this.rawData = DataManager.load();
@@ -17,7 +17,7 @@ public class LoadedGame {
             String word = rawData.get(i);
             System.out.println(word);
             if (word.equals(Game.MONEY_KEY))
-                this.currency = Integer.parseInt(rawData.get(i+1));
+                this.currency = Long.parseLong(rawData.get(i+1));
         }
     }
 
@@ -25,7 +25,7 @@ public class LoadedGame {
         return this.rawData != null;
     }
 
-    public int getCurrency() {
+    public long getCurrency() {
         return currency;
     }
 }

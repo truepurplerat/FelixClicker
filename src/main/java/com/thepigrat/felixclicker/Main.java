@@ -17,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 380, 240);
         stage.setTitle("FelixClicker");
         stage.setScene(scene);
         stage.show();
@@ -53,6 +53,7 @@ public class Main extends Application {
         game = new Game(controller);
         if (loaded.isLoaded()) {
             game.purse.setCurrency(loaded.getCurrency());
+            game.updatecurrency();
         }
     }
 
